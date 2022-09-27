@@ -13,15 +13,16 @@ javac [TestClass]
 ```
 
 Java 8 需要自己编译类，才能运行 soot
+
 2. Run
 
 ```shell
 java [javaOptions] soot.Main [sootOptions] classname
 java [javaOptions] soot.Main [sootOptions] -process-dir dirname
 ```
-- `javaOptions`：java 可以接收的选项，例如通过 `-cp $SOOT_HOME` 来指定 soot 的 jar 包目录.
-- `sootOptions`：soot 可以接收的选项，通过 `java [javaOptions] soot.Main -h` 获取选项列表
-- `classname`：soot 要分析的类，亦可以通过 -process-dir 分析指定目录下所有类
+- `javaOptions`：java 可以接收的选项，例如通过 `-cp $SOOT_CLASS` 来指定 soot 的 jar 包目录.
+- `sootOptions`：soot 可以接收的选项，通过 `java [javaOptions] soot.Main -h` 获取支持的选项列表
+- `classname`：soot 要分析的类，亦可以通过 `-process-dir` 分析指定目录下所有类
 
 ## Java API
 
@@ -30,5 +31,8 @@ java [javaOptions] soot.Main [sootOptions] -process-dir dirname
 - `DataFlowAnalysis`：数据流分析
 - `.*Transformer`：用于向soot执行的指定phase添加一个subphase
 
-> ### Reference
-> - [Soot Options](https://soot-build.cs.uni-paderborn.de/public/origin/develop/soot/soot-develop/options/soot_options.htm)
+# Reference
+ 
+- [Soot Options](https://soot-build.cs.uni-paderborn.de/public/origin/develop/soot/soot-develop/options/soot_options.htm)
+- [cflow analysis](https://github.com/HappyTsing/cflow_analysis)
+- [soot tutorial](https://blog.leqing.work/2022/09/27/soot-tutorial/)
