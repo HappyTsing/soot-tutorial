@@ -7,22 +7,11 @@ import soot.options.Options;
 
 import java.util.Map;
 
-public class intraTransformer {
+public class intraTransformer extends BodyTransformer {
     private static final Logger logger = LoggerFactory.getLogger(intraTransformer.class);
 
-    public static void main(String[] args) {
-        String[] sootArgs = {
-                // Input Options
-                "-cp", "C:\\Users\\59376\\IdeaProjects\\TestSoot\\src\\test\\java",
-                "-pp",
-//                "-allow-phantom-refs",
-//                "-no-bodies-for-excluded",
-
-                // Output Options
-                "-f", "J",
-                "com.wang.Foo"
-//                "-process-dir","C:\\Users\\59376\\IdeaProjects\\TestSoot\\src\\test\\java"
-        };
-        soot.Main.main(sootArgs);
+    @Override
+    protected void internalTransform(Body body, String s, Map<String, String> map) {
+        logger.info("This is intraTransformer, I print Method Name Here: {}",body.getMethod().getName()); //输出下程序方法的名字
     }
 }

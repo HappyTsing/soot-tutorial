@@ -1,27 +1,27 @@
 package com.wang;
 
-import soot.PackManager;
-import soot.Scene;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import soot.SceneTransformer;
-import soot.Transform;
 
-import java.util.Map;
+import java.util.*;
 
-public class interTransformer{
-    public static void main(String[] args) {
+/**
+ * 注：数据流分析代码仅是模板，并未具体实现，因此无法运行！
+ */
+public class interTransformer extends SceneTransformer{
 
+    private static final Logger logger = LoggerFactory.getLogger(interTransformer.class);
 
-        String[] sootArgs = {
-                // Input Options
-                "-cp", "C:\\Users\\59376\\IdeaProjects\\TestSoot\\src\\test\\java\\com\\wang",
-                "-pp",
-//                "-allow-phantom-refs",
-//                "-no-bodies-for-excluded",
+    private final DataFlowAnalysis analysis;
 
-                // Output Options
-                "-f", "J",
-                "-process-dir","C:\\Users\\59376\\IdeaProjects\\TestSoot\\src\\test\\java\\com\\wang"
-        };
-        soot.Main.main(sootArgs);
+    public interTransformer(DataFlowAnalysis analysis) {
+        this.analysis = analysis;
+    }
+
+    @Override
+    protected void internalTransform(String s, Map<String, String> map) {
+        analysis.doAnalysis();
+        logger.info("This is internalTransform"); //输出下程序方法的名字
     }
 }

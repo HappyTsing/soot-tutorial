@@ -1,43 +1,34 @@
-# Prepare
-```
-wget -P soot https://repo1.maven.org/maven2/org/soot-oss/soot/4.3.0/soot-4.3.0-jar-with-dependencies.jar
-```
-# soot learning
+# Description
 
+本项目用于记录学习soot的诸多疑惑，亦为后来者提供一定的代码模板。
 
+# Usage
 
-![pack](https://pic1.zhimg.com/v2-08dc066f2f1cea737c10f80f65069838_r.jpg)
+## Shell
+1. Prepare
 
-
-# soot for shell
 ```shell
-export SOOT_HOME = shell_soot/soot-4.3.0-jar-with-dependencies.jar
-export SOOT_CLASS_PATH = src/test/java
-# verify install
-java -cp shell_soot/soot-4.3.0-jar-with-dependencies.jar  soot.Main  -h
-
-# compile
-javac src/test/java/com/wang/HelloWorld.java   
-
-# use soot output .jimple
-java -cp soot/soot-4.3.0-jar-with-dependencies.jar soot.Main -cp src/test/java -pp -f J com.wang.HelloWorld
+wget -P soot https://repo1.maven.org/maven2/org/soot-oss/soot/4.3.0/soot-4.3.0-jar-with-dependencies.jar
+javac [TestClass]
 ```
-- `-cp $SOOT_HOME` 指定soot的jar包目录
-- `-cp $POJO_HOME` : 指定所要分析 `.class` 文件的目目录
-- `-pp`: 指定soot去自动搜索java的path， 主要是rt.jar和jce.jar， soot会去$JAVA_HOME下寻找
-- `-f J`: 指定输出文件类型， J就是jimple
-- `com.wang.HelloWorld`: 你要分析的class的名字
 
+Java 8 需要自己编译类，才能运行 soot
+2. Run
 
+```shell
+java [javaOptions] soot.Main [sootOptions] classname
+java [javaOptions] soot.Main [sootOptions] -process-dir dirname
+```
+- `javaOptions`：java 可以接收的选项，例如通过 `-cp $SOOT_HOME` 来指定 soot 的 jar 包目录.
+- `sootOptions`：soot 可以接收的选项，通过 `java [javaOptions] soot.Main -h` 获取选项列表
+- `classname`：soot 要分析的类，亦可以通过 -process-dir 分析指定目录下所有类
 
+## Java API
 
-
-
-
-
-
-
+- `firstRun.java`：使用java来模拟上述的shell执行
+- `analysis,java`：从scene到unit的soot分析方法调用
+- `DataFlowAnalysis`：数据流分析
+- `.*Transformer`：用于向soot执行的指定phase添加一个subphase
 
 > ### Reference
-> https://github.com/soot-oss/soot/wiki/Introduction:-Soot-as-a-command-line-tool
-> [soot 学习笔记](https://blog.csdn.net/beswkwangbo/category_2710855.html)
+> - [Soot Options](https://soot-build.cs.uni-paderborn.de/public/origin/develop/soot/soot-develop/options/soot_options.htm)
